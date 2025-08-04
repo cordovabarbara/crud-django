@@ -8,5 +8,5 @@ def task_list_and_create(request):
 
     return render(request, 'task_list.html',{
         'form':form,
-        'task':tasks
+        'tasks':tasks
     })
