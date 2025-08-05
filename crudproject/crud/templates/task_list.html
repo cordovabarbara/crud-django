@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task Manager</title>
 </head>
 <body>
     <form action="" method="post">
@@ -11,13 +11,24 @@
         {{ form.as_p}}
         <button type="submit">Save</button>
     </form>
-    {% for task in tasks %}
-        <li>
-            <strong>{{ task.title }}</strong> {{ task.description }}
-        </li>
-    {% empty %}
-        <h2>Tasks</h2>
-        <li> No Taks save</li>
-    {% endfor %}
+
+    <h2>Pending Tasks</h2>
+        <ul>
+            {% for task in incompleted_tasks %}
+                <li>{{task.title}}</li>
+            {% empty %}
+            <li>No Pending tasks</li>
+        {% endfor %}
+        </ul>
+        
+
+    <h2>Completed Tasks</h2>
+        <ul>
+            {% for task in completed_tasks %}
+                <li>{{ task.title }}</li>
+            {% empty %}
+            <li>No completed tasks</li>
+            {% endfor %}
+        </ul>
 </body>
 </html>
