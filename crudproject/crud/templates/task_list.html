@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body class="bg-gradient-to-br from-red-300 to-red-800 min-h-screen p-10">
     <div class="max-w-6xl mx-auto bg-white shadow-md rounded-lg p-8">
         <h1 class="text-2xl font-bold mb-6 text-center">Task Manager</h1>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             <!-- Form -->
             <div>
@@ -21,16 +22,30 @@
                 </form>
             </div>
 
-            <!-- Tasks List-->
+            <!-- Tasks List -->
             <div>
                 <h2 class="text-xl font-semibold mb-2">Pending Tasks</h2>
                 <ul class="mb-6 list-disc list-inside space-y-1">
                     {% for task in incompleted_tasks %}
                         <form action="{% url 'crud:update_task' task.id %}" method="post">
                             {% csrf_token %}
-                            <li><span class="text-red-600 font-bold">{{ task.title }}</span> {{ task.description}}
-                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %} checked {% endif %}
-                            class="w-4 h-4 align-middle accent-red-400 cursor-pointer">
+                            <li class="flex items-center gap-4">
+                                <div>
+                                    <span class="text-red-600 font-bold">{{ task.title }}</span> {{ task.description }}
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <!-- Checkbox -->
+                                    <input type="checkbox" name="completed"
+                                        onchange="this.form.submit()"
+                                        {% if task.completed %} checked {% endif %}
+                                        class="w-5 h-5 accent-red-400 cursor-pointer">
+                                    
+                                    <!-- Btn Edit -->
+                                    <a href="{% url 'crud:edit_task' task.id %}" 
+                                    class="inline-flex items-center bg-pink-500 text-white px-2 py-1 rounded hover:bg-red-700 text-sm">
+                                        <i class='bx bx-edit text-base mr-1'></i> Edit
+                                    </a>
+                                </div>
                             </li>
                         </form>
                     {% empty %}
