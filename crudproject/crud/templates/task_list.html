@@ -6,11 +6,11 @@
     <title>Task Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-10">
+<body class="bg-gradient-to-br from-red-300 to-red-800 min-h-screen p-10">
     <div class="max-w-6xl mx-auto bg-white shadow-md rounded-lg p-8">
         <h1 class="text-2xl font-bold mb-6 text-center">Task Manager</h1>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             <!-- Form -->
             <div>
                 <h2 class="text-xl font-semibold mb-4">Create Task</h2>
@@ -26,7 +26,13 @@
                 <h2 class="text-xl font-semibold mb-2">Pending Tasks</h2>
                 <ul class="mb-6 list-disc list-inside space-y-1">
                     {% for task in incompleted_tasks %}
-                        <li class="text-gray-800">{{ task.title }}</li>
+                        <form action="{% url 'crud:update_task' task.id %}" method="post">
+                            {% csrf_token %}
+                            <li><span class="text-red-600 font-bold">{{ task.title }}</span> {{ task.description}}
+                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %} checked {% endif %}
+                            class="w-4 h-4 align-middle accent-red-400 cursor-pointer">
+                            </li>
+                        </form>
                     {% empty %}
                         <li class="text-gray-400">No pending tasks</li>
                     {% endfor %}
