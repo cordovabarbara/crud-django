@@ -22,6 +22,7 @@ def task_list_and_create(request):
         'incompleted_tasks': incompleted_tasks
     })
     
+#toggle
 def update_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     
@@ -29,7 +30,8 @@ def update_task(request, task_id):
         task.completed = not task.completed
         task.save()
         return redirect('crud:crud_list')
-    
+
+#edit Task
 def edit_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     
@@ -42,3 +44,11 @@ def edit_task(request, task_id):
         form = TaskForm(instance=task)
         
     return render(request,'edit_task.html', {'form':form})
+
+#Delete
+    def delete_task(request, task_id):
+        task = get_object_or_404(Task, id=task_id)
+        
+        if request.method == 'POST':
+            task.delete()
+            return redirect('crud:crud_list')
