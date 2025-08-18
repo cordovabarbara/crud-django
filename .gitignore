@@ -1,5 +1,39 @@
+# Entornos virtuales
 my_env/
-__pycache__/
+venv/
+.env/
+*.py[cod]
+
+# Django
+*.log
+*.pot
 *.pyc
+__pycache__/
 db.sqlite3
+migrations/
+
+# Archivos de entorno
 .env
+.env.local
+.env.prod
+.env.dev
+
+# Supabase (si lo usaste)
+supabase-root.pem
+
+# Archivos estáticos y medios
+staticfiles/
+media/
+
+# IDE/Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Railway (opcional)
+railway.json
