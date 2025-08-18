@@ -46,7 +46,7 @@ def edit_task(request, task_id):
     return render(request,'edit_task.html', {'form':form})
 
 #Delete
-    def delete_task(request, task_id):
+def delete_task(request, task_id):
         task = get_object_or_404(Task, id=task_id)
         
         if request.method == 'POST':
